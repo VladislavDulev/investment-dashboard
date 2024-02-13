@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import SingleSidebarOption from "./sidebarComponents/SingleSidebarOption";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { LuBuilding2 } from "react-icons/lu";
@@ -7,14 +7,15 @@ import { CiFileOn } from "react-icons/ci";
 import { IoIosContact } from "react-icons/io";
 import { CiSettings } from "react-icons/ci";
 import { FiMenu } from "react-icons/fi";
-
-//TODO: Check naming and structure of the components for the sidebar.
+import { toggleSidebar } from "../../actions/sidebarActions";
+import { RootState } from "../../reducers/index";
 
 const Sidebar = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const collapsed = useSelector((state: RootState) => state.sidebar.collapsed);
+  const dispatch = useDispatch();
 
-  const toggleSidebar = () => {
-    setCollapsed(!collapsed);
+  const toggleSidebarHandler = () => {
+    dispatch(toggleSidebar());
   };
 
   return (
@@ -25,7 +26,7 @@ const Sidebar = () => {
       >
         <div
           className="cursor-pointer flex items-center justify-center py-4"
-          onClick={toggleSidebar}
+          onClick={toggleSidebarHandler}
         >
           <FiMenu className="text-white text-2xl" />
         </div>
