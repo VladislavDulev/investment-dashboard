@@ -34,7 +34,7 @@ const CardsSection = () => {
       {cardsData.map((card) => (
         <Card
           key={card.id}
-          title={card.title}
+          investmentName={card.investmentName}
           status={card.status}
           onToggle={() => handleToggle(card.id)}
         />
