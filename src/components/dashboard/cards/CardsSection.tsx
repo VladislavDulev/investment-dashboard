@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { cards } from "../../../data/cards";
 import { CardStatusTypes } from "../../../types/cardStatusTypes";
-import Card from "./Card";
+import InvestmentManagementCard from "./InvestmentManagementCard";
 
 //TODO: Maybe renaming is needed
 const CardsSection = () => {
@@ -15,7 +15,7 @@ const CardsSection = () => {
               ...card,
               status:
                 card.status === CardStatusTypes.ACTIVE
-                  ? CardStatusTypes.DISABLED
+                  ? CardStatusTypes.CLOSED
                   : CardStatusTypes.ACTIVE,
             }
           : card
@@ -32,7 +32,7 @@ const CardsSection = () => {
   return (
     <div className="cards">
       {cardsData.map((card) => (
-        <Card
+        <InvestmentManagementCard
           key={card.id}
           investmentName={card.investmentName}
           status={card.status}

@@ -1,4 +1,5 @@
 export enum CardStatusTypes {
+  INVESTED = "invested",
   ACTIVE = "active",
-  DISABLED = "disabled",
+  CLOSED = "closed",
 }

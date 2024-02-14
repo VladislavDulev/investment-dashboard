@@ -4,7 +4,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App bg-gray-900">
       <div className="flex">
         <Sidebar />
         <Dashboard />

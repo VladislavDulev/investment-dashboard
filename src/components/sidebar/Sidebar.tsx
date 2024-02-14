@@ -1,3 +1,4 @@
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SingleSidebarOption from "./sidebarComponents/SingleSidebarOption";
 import { LuLayoutDashboard } from "react-icons/lu";
@@ -19,7 +20,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="flex h-screen bg-gray-200">
+    <div className="flex h-screen">
       <div
         className="bg-gray-800 transition-width duration-300"
         style={{ width: collapsed ? "4rem" : "16rem" }}
