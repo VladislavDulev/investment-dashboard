@@ -9,7 +9,6 @@ const Panels = () => {
         <InvestmentStatusCard
           cardType={CardStatusTypes.INVESTED}
           title="total invested"
-          value="$69,134"
         />
       </div>
 
@@ -17,14 +16,12 @@ const Panels = () => {
         <InvestmentStatusCard
           cardType={CardStatusTypes.ACTIVE}
           title="active"
-          value="4"
         />
       </div>
       <div className="panel-closed bg-gray-900 p-4 hidden sm:block lg:col-span-1 xl:col-span-1">
         <InvestmentStatusCard
           cardType={CardStatusTypes.CLOSED}
           title="closed"
-          value="2"
         />
       </div>
 
@@ -32,14 +29,12 @@ const Panels = () => {
         <InvestmentStatusCard
           cardType={CardStatusTypes.ACTIVE}
           title="active"
-          value="4"
         />
       </div>
       <div className="panel-closed bg-gray-900 p-4 sm:hidden lg:col-span-1 xl:col-span-1">
         <InvestmentStatusCard
           cardType={CardStatusTypes.CLOSED}
           title="closed"
-          value="2"
         />
       </div>
       <div className="panel-chart bg-gray-900 p-4 sm:col-span-2 lg:col-span-3 xl:col-span-3">
