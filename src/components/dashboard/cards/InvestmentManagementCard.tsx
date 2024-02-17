@@ -2,12 +2,29 @@ import Toggle from "react-toggle";
 import "react-toggle/style.css";
 import { CardStatusTypes } from "../../../types/cardStatusTypes";
 import { ReactComponent as InvestmentIcon } from "../../../assets/icons/icon-invested.svg";
+import { InvestmentNamesTypes } from "../../../types/InvestmentNamesTypes";
+import { InvestmentTypes } from "../../../types/investmentTypes";
+import { InvestmentListingsTypes } from "../../../types/investmentListingsTypes";
+
+interface IInvestmentManagementCard {
+  status: CardStatusTypes;
+  investmentType: InvestmentTypes;
+  investmentName: InvestmentNamesTypes;
+  investmentListing: InvestmentListingsTypes;
+  value: number;
+  date: string;
+  onToggle: () => void;
+}
 
 const InvestmentManagementCard = ({
-  investmentName,
   status,
+  investmentType,
+  investmentName,
+  investmentListing,
+  value,
+  date,
   onToggle,
-}: any) => {
+}: IInvestmentManagementCard) => {
   return (
     <div className="bg-blue-200 p-4 rounded-lg shadow-md mb-4 relative">
       <div
@@ -16,24 +33,24 @@ const InvestmentManagementCard = ({
         }`}
       >
         {/* Toggle */}
-        <div className="absolute top-0 left-0 w-64 h-35 flex-shrink-0">
+        <div className="absolute top-0 left-0 flex-shrink-0">
           <Toggle
             checked={status === CardStatusTypes.ACTIVE}
             onChange={onToggle}
-            className="w-64 h-35 m-2"
+            className="m-2"
           />
         </div>
         {/* Date */}
         <div className="absolute top-0 right-0 text-gray-600 font-red-hat-display text-base font-normal m-2">
-          6 December
+          {date}
         </div>
         {/* Stocks */}
         <div className="text-gray-600 font-red-hat-display text-base font-normal">
-          Stocks
+          {investmentType}
         </div>
         {/* Amount */}
         <div className="text-white font-red-hat-display text-5xl font-normal mt-2">
-          Amount
+          {value}
         </div>
         {/* Line */}
         <div className="w-295.007px h-1 bg-gray-300 mt-2"></div>
@@ -44,11 +61,11 @@ const InvestmentManagementCard = ({
             <InvestmentIcon className="mr-2 grid-row-span-2" />
             <div>
               <span className="text-gray-600 font-red-hat-display text-base font-normal text-white font-red-hat-display text-base font-normal">
-                Gold
+                {investmentName}
               </span>
               <span> | </span>
               <span className="text-gray-600 font-red-hat-display text-base font-normal">
-                AU
+                {investmentListing}
               </span>
             </div>
           </div>

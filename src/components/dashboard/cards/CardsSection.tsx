@@ -8,6 +8,10 @@ import {
   setCanceledCardCount,
   setTotalCardValue,
 } from "../../../actions/dashboardActions";
+import { InvestmentTypes } from "../../../types/investmentTypes";
+import { InvestmentNamesTypes } from "../../../types/InvestmentNamesTypes";
+import { InvestmentListingsTypes } from "../../../types/investmentListingsTypes";
+import { ICard } from "../../interfaces/card";
 
 //TODO: Maybe renaming is needed
 const CardsSection = () => {
@@ -50,10 +54,10 @@ const CardsSection = () => {
     highestIdRef.current += 1;
     const newCard = {
       id: highestIdRef.current,
-      status: "active",
-      investmentType: "Commodities",
-      investmentName: "Test",
-      investmentListing: "Test",
+      status: CardStatusTypes.ACTIVE,
+      investmentType: InvestmentTypes.COMMODITIES,
+      investmentName: InvestmentNamesTypes.TESLA,
+      investmentListing: InvestmentListingsTypes.TSLA,
       value: 200,
       date: "15 February",
     };
@@ -63,10 +67,14 @@ const CardsSection = () => {
   return (
     <div className="cards">
       <button onClick={handleAddCard}>Add Card</button>
-      {cardsData.map((card) => (
+      {cardsData.map((card: ICard) => (
         <InvestmentManagementCard
           key={card.id}
+          investmentType={card.investmentType}
           investmentName={card.investmentName}
+          investmentListing={card.investmentListing}
+          value={card.value}
+          date={card.date}
           status={card.status}
           onToggle={() => handleToggle(card.id)}
         />
