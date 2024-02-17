@@ -3,7 +3,6 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
 const ChartComponent = () => {
-  // Mocked data for the categories
   const chartData = [
     { name: "Cash", y: 10 },
     { name: "Crypto", y: 20 },
@@ -13,15 +12,14 @@ const ChartComponent = () => {
     { name: "Land", y: 60 },
   ];
 
-  // Highcharts configuration options for a donut chart
   const options = {
     title: {
       text: "Asset Distribution",
     },
     plotOptions: {
       pie: {
-        innerSize: "50%", // Make it a donut chart by setting innerSize
-        depth: 45, // Adjust the depth of the donut chart
+        innerSize: "50%",
+        depth: 45,
         dataLabels: {
           enabled: true,
           format: "<b>{point.name}</b>: {point.percentage:.1f} %",

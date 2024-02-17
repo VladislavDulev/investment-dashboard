@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import {
   setActiveCardCount,
   setCanceledCardCount,
+  setTotalCardValue,
 } from "../../../actions/dashboardActions";
 
 //TODO: Maybe renaming is needed
@@ -22,9 +23,11 @@ const CardsSection = () => {
   useEffect(() => {
     const activeCount = getCountByStatus(cardsData, CardStatusTypes.ACTIVE);
     const closedCount = getCountByStatus(cardsData, CardStatusTypes.CLOSED);
+    const totalValue = cardsData.reduce((total, card) => total + card.value, 0);
 
     dispatch(setActiveCardCount(activeCount));
     dispatch(setCanceledCardCount(closedCount));
+    dispatch(setTotalCardValue(totalValue));
   }, [cardsData, dispatch]);
 
   const handleToggle = (id: number) => {
@@ -51,7 +54,7 @@ const CardsSection = () => {
       investmentType: "Commodities",
       investmentName: "Test",
       investmentListing: "Test",
-      value: 0,
+      value: 200,
       date: "15 February",
     };
     setCardsData((prevCards) => [...prevCards, newCard]);

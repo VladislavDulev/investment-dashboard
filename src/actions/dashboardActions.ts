@@ -13,3 +13,8 @@ export const setCanceledCardCount = (count: number) => {
     payload: count,
   };
 };
+
+export const setTotalCardValue = (value: number) => ({
+  type: ActionTypes.SET_TOTAL_CARD_VALUE,
+  payload: value,
+});

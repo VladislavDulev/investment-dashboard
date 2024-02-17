@@ -20,6 +20,10 @@ const InvestmentStatusCard = ({ cardType, title }: IInvestmentStatusCard) => {
     (state: RootState) => state.dashboard.closedCardCount
   );
 
+  const totalCardValue = useSelector(
+    (state: RootState) => state.dashboard.totalCardValue
+  );
+
   // //TODO: Case for the investment card when add value to the store for it
 
   const renderContent = (cardType: CardStatusTypes, showIcon: boolean) => {
@@ -30,7 +34,7 @@ const InvestmentStatusCard = ({ cardType, title }: IInvestmentStatusCard) => {
         content = showIcon ? (
           <InvestmentIcon className="mr-2 mb-2 ml-2 mt-2" />
         ) : (
-          "1000"
+          totalCardValue
         );
         break;
       case CardStatusTypes.ACTIVE:
