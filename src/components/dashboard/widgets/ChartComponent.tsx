@@ -1,16 +1,18 @@
 import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducers";
 
 const ChartComponent = () => {
-  const chartData = [
-    { name: "Cash", y: 10 },
-    { name: "Crypto", y: 20 },
-    { name: "Stocks", y: 30 },
-    { name: "Gold", y: 40 },
-    { name: "Property", y: 50 },
-    { name: "Land", y: 60 },
-  ];
+  const cardsData = useSelector(
+    (state: RootState) => state.dashboard.cardsData
+  );
+
+  const chartData = cardsData.map((card) => ({
+    name: card.investmentName,
+    y: card.value,
+  }));
 
   const options = {
     title: {

@@ -4,25 +4,38 @@ import { CardStatusTypes } from "../../../types/cardStatusTypes";
 import InvestmentManagementCard from "./InvestmentManagementCard";
 import { useDispatch } from "react-redux";
 import {
+  addCard,
+  initCards,
   setActiveCardCount,
   setCanceledCardCount,
   setTotalCardValue,
+  toggleCardStatus,
 } from "../../../actions/dashboardActions";
 import { InvestmentTypes } from "../../../types/investmentTypes";
 import { InvestmentNamesTypes } from "../../../types/InvestmentNamesTypes";
 import { InvestmentListingsTypes } from "../../../types/investmentListingsTypes";
 import { ICard } from "../../interfaces/card";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducers";
 
 //TODO: Maybe renaming is needed
 const CardsSection = () => {
   const dispatch = useDispatch();
-  const [cardsData, setCardsData] = useState(cards);
+
+  const cardsData = useSelector(
+    (state: RootState) => state.dashboard.cardsData
+  );
   const highestIdRef = useRef(Math.max(...cardsData.map((card) => card.id)));
 
   //TODO: Potentially customHook could be created.
   const getCountByStatus = (cards: any[], status: CardStatusTypes): number => {
     return cards.filter((card) => card.status === status).length;
   };
+
+  //TODO: See how to merge or improve
+  useEffect(() => {
+    dispatch(initCards(cards));
+  }, []);
 
   useEffect(() => {
     const activeCount = getCountByStatus(cardsData, CardStatusTypes.ACTIVE);
@@ -35,19 +48,12 @@ const CardsSection = () => {
   }, [cardsData, dispatch]);
 
   const handleToggle = (id: number) => {
-    setCardsData((prevCards) =>
-      prevCards.map((card) =>
-        card.id === id
-          ? {
-              ...card,
-              status:
-                card.status === CardStatusTypes.ACTIVE
-                  ? CardStatusTypes.CLOSED
-                  : CardStatusTypes.ACTIVE,
-            }
-          : card
-      )
-    );
+    const newStatus =
+      cardsData.find((card) => card.id === id)?.status ===
+      CardStatusTypes.ACTIVE
+        ? CardStatusTypes.CLOSED
+        : CardStatusTypes.ACTIVE;
+    dispatch(toggleCardStatus(id, newStatus));
   };
 
   const handleAddCard = () => {
@@ -61,7 +67,8 @@ const CardsSection = () => {
       value: 200,
       date: "15 February",
     };
-    setCardsData((prevCards) => [...prevCards, newCard]);
+
+    dispatch(addCard(newCard));
   };
 
   return (
