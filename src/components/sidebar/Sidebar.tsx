@@ -23,7 +23,7 @@ const Sidebar = () => {
   );
 
   return (
-    <div className="sidebar flex h-100">
+    <div className="sidebar flex sticky top-0 h-screen">
       <div
         className={`${getColorByMode(
           isDarkMode,

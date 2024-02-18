@@ -9,19 +9,19 @@ const Panels = () => {
         <div className="panel-invested ">
           <InvestmentStatusCard
             cardType={CardStatusTypes.INVESTED}
-            title="total invested"
+            title="Total Invested"
           />
         </div>
         <div className="panel-active">
           <InvestmentStatusCard
             cardType={CardStatusTypes.ACTIVE}
-            title="active"
+            title="Active"
           />
         </div>
         <div className="panel-closed">
           <InvestmentStatusCard
             cardType={CardStatusTypes.CLOSED}
-            title="closed"
+            title="Closed"
           />
         </div>
       </div>

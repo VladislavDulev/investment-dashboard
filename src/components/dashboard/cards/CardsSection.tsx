@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cards } from "../../../data/cards";
 import { CardStatusTypes } from "../../../types/cardStatusTypes";
 import InvestmentManagementCard from "./InvestmentManagementCard";
@@ -69,7 +69,7 @@ const CardsSection = () => {
   };
 
   return (
-    <div className="cards grid grid-cols-3 gap-10 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 ml-10 mr-10">
+    <div className="cards grid grid-cols-3 gap-10 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 m-10">
       <AddNewInvestmentCardBtn onAddClick={handleAddModalOpen} />
       <ModalForm
         isOpen={isModalOpen}

@@ -1,5 +1,4 @@
 import { ICard } from "../components/interfaces/card";
-import { cards } from "../data/cards";
 import { ActionTypes } from "../types/actionTypes";
 import { CardStatusTypes } from "../types/cardStatusTypes";
 

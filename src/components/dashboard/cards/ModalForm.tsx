@@ -16,9 +16,6 @@ import { InvestmentTypes } from "../../../types/investmentTypes";
 import { CardStatusTypes } from "../../../types/cardStatusTypes";
 import { InvestmentNamesTypes } from "../../../types/InvestmentNamesTypes";
 import { InvestmentListingsTypes } from "../../../types/investmentListingsTypes";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../reducers";
-import { getColorByMode } from "../../../utils/utils";
 
 interface IModalForms {
   isOpen: boolean;
@@ -27,10 +24,6 @@ interface IModalForms {
 }
 
 const ModalForm = ({ isOpen, onClose, onSubmit }: IModalForms) => {
-  const isDarkMode = useSelector(
-    (state: RootState) => state.sidebar.isDarkMode
-  );
-
   const handleInvestmentTypeChange = (
     selectedInvestmentName: string,
     setFieldValue: Function

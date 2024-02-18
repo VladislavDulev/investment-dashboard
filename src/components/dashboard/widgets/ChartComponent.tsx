@@ -37,6 +37,9 @@ const ChartComponent = () => {
         },
       },
     },
+    accessibility: {
+      enabled: false,
+    },
     series: [
       {
         type: "pie",
