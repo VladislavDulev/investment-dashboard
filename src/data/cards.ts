@@ -4,6 +4,7 @@ import { InvestmentListingsTypes } from "../types/investmentListingsTypes";
 import { InvestmentNamesTypes } from "../types/InvestmentNamesTypes";
 import { InvestmentTypes } from "../types/investmentTypes";
 
+//TODO: Fix dates
 export const cards: ICard[] = [
   {
     id: 1,

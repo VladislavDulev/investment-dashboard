@@ -11,17 +11,15 @@ import {
   setTotalCardValue,
   toggleCardStatus,
 } from "../../../actions/dashboardActions";
-import { InvestmentTypes } from "../../../types/investmentTypes";
-import { InvestmentNamesTypes } from "../../../types/InvestmentNamesTypes";
-import { InvestmentListingsTypes } from "../../../types/investmentListingsTypes";
 import { ICard } from "../../interfaces/card";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
+import ModalForm from "./ModalForm";
 
 //TODO: Maybe renaming is needed
 const CardsSection = () => {
   const dispatch = useDispatch();
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const cardsData = useSelector(
     (state: RootState) => state.dashboard.cardsData
   );
@@ -35,7 +33,7 @@ const CardsSection = () => {
   //TODO: See how to merge or improve
   useEffect(() => {
     dispatch(initCards(cards));
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     const activeCount = getCountByStatus(cardsData, CardStatusTypes.ACTIVE);
@@ -56,24 +54,23 @@ const CardsSection = () => {
     dispatch(toggleCardStatus(id, newStatus));
   };
 
-  const handleAddCard = () => {
+  const handleAddCard = (formData: any) => {
     highestIdRef.current += 1;
     const newCard = {
       id: highestIdRef.current,
-      status: CardStatusTypes.ACTIVE,
-      investmentType: InvestmentTypes.COMMODITIES,
-      investmentName: InvestmentNamesTypes.TESLA,
-      investmentListing: InvestmentListingsTypes.TSLA,
-      value: 200,
-      date: "15 February",
+      ...formData,
     };
-
     dispatch(addCard(newCard));
   };
 
   return (
     <div className="cards">
-      <button onClick={handleAddCard}>Add Card</button>
+      <button onClick={() => setIsModalOpen(true)}>Add Card</button>
+      <ModalForm
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleAddCard}
+      />
       {cardsData.map((card: ICard) => (
         <InvestmentManagementCard
           key={card.id}

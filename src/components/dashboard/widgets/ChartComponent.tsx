@@ -16,7 +16,7 @@ const ChartComponent = () => {
 
   const options = {
     title: {
-      text: "Asset Distribution",
+      text: "Area investments",
     },
     plotOptions: {
       pie: {
