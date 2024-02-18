@@ -15,6 +15,7 @@ import { ICard } from "../../interfaces/card";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
 import ModalForm from "./ModalForm";
+import AddNewInvestmentCardBtn from "./AddNewInvestmentCardBtn";
 
 //TODO: Maybe renaming is needed
 const CardsSection = () => {
@@ -25,10 +26,18 @@ const CardsSection = () => {
   );
   const highestIdRef = useRef(Math.max(...cardsData.map((card) => card.id)));
 
+  const handleAddModalOpen = () => {
+    setIsModalOpen(true);
+  };
+
   //TODO: Potentially customHook could be created.
   const getCountByStatus = (cards: any[], status: CardStatusTypes): number => {
     return cards.filter((card) => card.status === status).length;
   };
+
+  const activeCount = getCountByStatus(cardsData, CardStatusTypes.ACTIVE);
+  const closedCount = getCountByStatus(cardsData, CardStatusTypes.CLOSED);
+  const totalValue = cardsData.reduce((total, card) => total + card.value, 0);
 
   //TODO: See how to merge or improve
   useEffect(() => {
@@ -36,10 +45,6 @@ const CardsSection = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    const activeCount = getCountByStatus(cardsData, CardStatusTypes.ACTIVE);
-    const closedCount = getCountByStatus(cardsData, CardStatusTypes.CLOSED);
-    const totalValue = cardsData.reduce((total, card) => total + card.value, 0);
-
     dispatch(setActiveCardCount(activeCount));
     dispatch(setCanceledCardCount(closedCount));
     dispatch(setTotalCardValue(totalValue));
@@ -65,7 +70,7 @@ const CardsSection = () => {
 
   return (
     <div className="cards grid grid-cols-3 gap-10 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 ml-10 mr-10">
-      <button onClick={() => setIsModalOpen(true)}>Add Card</button>
+      <AddNewInvestmentCardBtn onAddClick={handleAddModalOpen} />
       <ModalForm
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

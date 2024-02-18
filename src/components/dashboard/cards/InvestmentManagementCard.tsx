@@ -108,17 +108,3 @@ const InvestmentManagementCard = ({
 };
 
 export default InvestmentManagementCard;
-
-//   return (
-//     <div
-//       className={`bg-blue-200 p-4 rounded-lg shadow-md mb-4 ${
-//         status === CardStatusTypes.CLOSED ? "bg-gray-400" : ""
-//       }`}
-//     >
-//       <h2>{investmentName}</h2>
-//       <Toggle checked={status === CardStatusTypes.ACTIVE} onChange={onToggle} />
-//     </div>
-//   );
-// };
-
-// export default InvestmentManagementCard;
