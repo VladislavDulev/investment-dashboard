@@ -4,7 +4,6 @@ import { InvestmentListingsTypes } from "../types/investmentListingsTypes";
 import { InvestmentNamesTypes } from "../types/InvestmentNamesTypes";
 import { InvestmentTypes } from "../types/investmentTypes";
 
-//TODO: Fix dates
 export const cards: ICard[] = [
   {
     id: 1,
@@ -13,7 +12,7 @@ export const cards: ICard[] = [
     investmentName: InvestmentNamesTypes.NETFLIX,
     investmentListing: InvestmentListingsTypes.NTFLX,
     value: 1234,
-    date: "6 December",
+    date: "2023-05-30",
   },
   {
     id: 2,
@@ -22,7 +21,8 @@ export const cards: ICard[] = [
     investmentName: InvestmentNamesTypes.APPLE,
     investmentListing: InvestmentListingsTypes.AAPL,
     value: 21196,
-    date: "21 September",
+
+    date: "2023-07-18",
   },
   {
     id: 3,
@@ -31,7 +31,8 @@ export const cards: ICard[] = [
     investmentName: InvestmentNamesTypes.DISNEY,
     investmentListing: InvestmentListingsTypes.DIS,
     value: 1234,
-    date: "3 August",
+
+    date: "2023-12-23",
   },
   {
     id: 4,
@@ -40,7 +41,7 @@ export const cards: ICard[] = [
     investmentName: InvestmentNamesTypes.GOLD,
     investmentListing: InvestmentListingsTypes.AU,
     value: 8678,
-    date: "23 December",
+    date: "2024-01-06",
   },
   {
     id: 5,
@@ -49,7 +50,7 @@ export const cards: ICard[] = [
     investmentName: InvestmentNamesTypes.TESLA,
     investmentListing: InvestmentListingsTypes.TSLA,
     value: 13534,
-    date: "21 September",
+    date: "2024-01-06",
   },
   {
     id: 6,
@@ -58,6 +59,6 @@ export const cards: ICard[] = [
     investmentName: InvestmentNamesTypes.BITCOIN,
     investmentListing: InvestmentListingsTypes.BTC,
     value: 1234,
-    date: "30 May",
+    date: "2024-01-22",
   },
 ];

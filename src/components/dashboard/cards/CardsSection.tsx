@@ -64,7 +64,7 @@ const CardsSection = () => {
   };
 
   return (
-    <div className="cards">
+    <div className="cards grid grid-cols-3 gap-10 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 xs:grid-cols-1 ml-10 mr-10">
       <button onClick={() => setIsModalOpen(true)}>Add Card</button>
       <ModalForm
         isOpen={isModalOpen}

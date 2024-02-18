@@ -52,7 +52,7 @@ const InvestmentManagementCard = ({
   const InvestmentManagementCard = (investmentName: InvestmentNamesTypes) => {
     const iconSrc = getIconSource(investmentName);
     return (
-      <div className="card">
+      <div>
         {iconSrc && <img src={iconSrc} alt={`${investmentName} Logo`} />}
       </div>
     );
@@ -60,8 +60,10 @@ const InvestmentManagementCard = ({
 
   return (
     <div
-      className={`bg-gray-800 rounded-lg p-4 shadow-md w-88 h-96 flex-shrink-0 flex flex-col justify-end relative mb-4  ${
-        status === CardStatusTypes.CLOSED ? "bg-gray-200" : ""
+      className={`card p-8 shadow-md w-88 h-96 flex-shrink-0 flex flex-col justify-end relative ${
+        status === CardStatusTypes.CLOSED
+          ? "bg-gray-500 rounded-lg"
+          : "bg-gray-800 rounded-lg"
       }`}
     >
       {/* Toggle */}
@@ -69,11 +71,11 @@ const InvestmentManagementCard = ({
         <Toggle
           checked={status === CardStatusTypes.ACTIVE}
           onChange={onToggle}
-          className="m-2"
+          className="m-8"
         />
       </div>
       {/* Date */}
-      <div className="absolute top-0 right-0 text-gray-600 font-red-hat-display text-base font-normal m-2">
+      <div className="absolute top-0 right-0 text-gray-600 font-red-hat-display text-base font-normal m-8 ">
         {date}
       </div>
       {/* Stocks */}
@@ -81,22 +83,21 @@ const InvestmentManagementCard = ({
         {investmentType}
       </div>
       {/* Amount */}
-      <div className="text-white font-red-hat-display text-5xl font-normal mt-2">
-        {value}
+      <div className="text-white font-red-hat-display text-5xl font-normal mb-20">
+        {`${value}$`}
       </div>
       {/* Line */}
-      <div className="w-295.007px h-1 bg-gray-300 mt-2"></div>
+      <div className="h-0.5 bg-gray-600 mt-2"></div>
       {/* Icon and texts */}
       <div className="text-white font-red-hat-display text-5xl font-normal mt-2 grid grid-cols-55-auto grid-rows-auto-auto">
-        {/* Wrap the icon and text in one div */}
-        <div className="flex items-center">
+        <div className="flex items-center pt-4">
           {InvestmentManagementCard(investmentName)}
-          <div>
-            <span className="text-gray-600 font-red-hat-display text-base font-normal text-white font-red-hat-display text-base font-normal">
+          <div className="pl-4">
+            <span className="text-gray-600 font-red-hat-display text-base font-normal text-white font-red-hat-display text-base font-normal block">
               {investmentName}
             </span>
-            <span> | </span>
-            <span className="text-gray-600 font-red-hat-display text-base font-normal">
+
+            <span className="text-gray-600 font-red-hat-display text-base font-normal block">
               {investmentListing}
             </span>
           </div>
