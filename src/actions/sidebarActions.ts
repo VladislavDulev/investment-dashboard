@@ -5,3 +5,7 @@ export const toggleSidebar = () => {
     type: ActionTypes.TOGGLE_SIDEBAR,
   };
 };
+
+export const toggleTheme = () => ({
+  type: "TOGGLE_THEME",
+});

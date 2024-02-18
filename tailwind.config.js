@@ -9,6 +9,11 @@ module.exports = {
       lg: "1024px",
       xl: "1280px",
     },
+    borderRadius: {
+      lg: "20px",
+
+      full: "9999px",
+    },
     extend: {},
   },
   plugins: [],

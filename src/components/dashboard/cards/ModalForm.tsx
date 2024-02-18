@@ -16,6 +16,9 @@ import { InvestmentTypes } from "../../../types/investmentTypes";
 import { CardStatusTypes } from "../../../types/cardStatusTypes";
 import { InvestmentNamesTypes } from "../../../types/InvestmentNamesTypes";
 import { InvestmentListingsTypes } from "../../../types/investmentListingsTypes";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducers";
+import { getColorByMode } from "../../../utils/utils";
 
 interface IModalForms {
   isOpen: boolean;
@@ -24,6 +27,10 @@ interface IModalForms {
 }
 
 const ModalForm = ({ isOpen, onClose, onSubmit }: IModalForms) => {
+  const isDarkMode = useSelector(
+    (state: RootState) => state.sidebar.isDarkMode
+  );
+
   const handleInvestmentTypeChange = (
     selectedInvestmentName: string,
     setFieldValue: Function
@@ -73,7 +80,7 @@ const ModalForm = ({ isOpen, onClose, onSubmit }: IModalForms) => {
 
   return (
     <Dialog open={isOpen}>
-      <DialogTitle>Add New Card</DialogTitle>
+      <DialogTitle className="bg-gray-300">Add New Investment</DialogTitle>
       <Formik
         initialValues={{
           id: 0,
@@ -85,17 +92,22 @@ const ModalForm = ({ isOpen, onClose, onSubmit }: IModalForms) => {
           date: new Date().toISOString().split("T")[0],
         }}
         onSubmit={(values: any) => {
-          console.log(values, values);
           onSubmit(values);
           onClose();
         }}
       >
         {({ handleChange, values, setFieldValue }: any) => (
-          <Form>
+          <Form className="bg-gray-300">
             <DialogContent>
-              <FormControl fullWidth>
-                <InputLabel id="investmentType-label">
-                  Investment Type
+              <FormControl
+                fullWidth
+                style={{ marginBottom: "15px", color: "red" }}
+              >
+                <InputLabel
+                  id="investmentType-label"
+                  style={{ backgroundColor: "#D1D5DB" }}
+                >
+                  Type
                 </InputLabel>
                 <Select
                   labelId="investmentType-label"
@@ -112,9 +124,12 @@ const ModalForm = ({ isOpen, onClose, onSubmit }: IModalForms) => {
                 </Select>
               </FormControl>
 
-              <FormControl fullWidth>
-                <InputLabel id="investmentName-label">
-                  Investment Name
+              <FormControl fullWidth style={{ marginBottom: "15px" }}>
+                <InputLabel
+                  id="investmentName-label"
+                  style={{ backgroundColor: "#D1D5DB" }}
+                >
+                  Name
                 </InputLabel>
                 <Select
                   labelId="investmentName-label"

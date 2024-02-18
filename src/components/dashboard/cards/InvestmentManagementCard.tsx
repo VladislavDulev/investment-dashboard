@@ -4,12 +4,15 @@ import { CardStatusTypes } from "../../../types/cardStatusTypes";
 import { InvestmentNamesTypes } from "../../../types/InvestmentNamesTypes";
 import { InvestmentTypes } from "../../../types/investmentTypes";
 import { InvestmentListingsTypes } from "../../../types/investmentListingsTypes";
-import LogoTesla from "../../../assets/icons/logo-tesla.jpg";
-import LogoApple from "../../../assets/icons/logo-apple.jpg";
-import LogoBitcoin from "../../../assets/icons/logo-bitcoin.jpg";
-import LogoGold from "../../../assets/icons/logo-gold.jpg";
-import LogoNetflix from "../../../assets/icons/logo-netflix.jpg";
-import LogoDisney from "../../../assets/icons/logo-disney.jpg";
+import LogoTesla from "../../../assets/icons/logo-tesla.png";
+import LogoApple from "../../../assets/icons/logo-apple.png";
+import LogoBitcoin from "../../../assets/icons/logo-bitcoin.png";
+import LogoGold from "../../../assets/icons/logo-gold.png";
+import LogoNetflix from "../../../assets/icons/logo-netflix.png";
+import LogoDisney from "../../../assets/icons/logo-disney.png";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../reducers";
+import { getColorByMode } from "../../../utils/utils";
 
 interface IInvestmentManagementCard {
   status: CardStatusTypes;
@@ -30,6 +33,10 @@ const InvestmentManagementCard = ({
   date,
   onToggle,
 }: IInvestmentManagementCard) => {
+  const isDarkMode = useSelector(
+    (state: RootState) => state.sidebar.isDarkMode
+  );
+
   const getIconSource = (investmentName: InvestmentNamesTypes) => {
     switch (investmentName) {
       case InvestmentNamesTypes.TESLA:
@@ -53,18 +60,23 @@ const InvestmentManagementCard = ({
     const iconSrc = getIconSource(investmentName);
     return (
       <div>
-        {iconSrc && <img src={iconSrc} alt={`${investmentName} Logo`} />}
+        {iconSrc && (
+          <img src={iconSrc} alt={`${investmentName} Logo`} className="w-12" />
+        )}
       </div>
     );
   };
 
   return (
     <div
-      className={`card p-8 shadow-md w-88 h-96 flex-shrink-0 flex flex-col justify-end relative ${
-        status === CardStatusTypes.CLOSED
-          ? "bg-gray-500 rounded-lg"
-          : "bg-gray-800 rounded-lg"
-      }`}
+      style={
+        status === CardStatusTypes.CLOSED ? { opacity: 0.4 } : { opacity: 1 }
+      }
+      className={`investment-management-card  ${getColorByMode(
+        isDarkMode,
+        "bg-gray-800",
+        "bg-gray-100"
+      )} rounded-lg p-8 w-88 h-96 flex-shrink-0 flex flex-col justify-end relative  `}
     >
       {/* Toggle */}
       <div className="absolute top-0 left-0 flex-shrink-0">
@@ -72,6 +84,7 @@ const InvestmentManagementCard = ({
           checked={status === CardStatusTypes.ACTIVE}
           onChange={onToggle}
           className="m-8"
+          icons={false}
         />
       </div>
       {/* Date */}
@@ -83,7 +96,13 @@ const InvestmentManagementCard = ({
         {investmentType}
       </div>
       {/* Amount */}
-      <div className="text-white font-red-hat-display text-5xl font-normal mb-20">
+      <div
+        className={`${getColorByMode(
+          isDarkMode,
+          "text-gray-100",
+          "text-gray-600"
+        )} font-red-hat-display text-5xl font-normal mb-20`}
+      >
         {`${value}$`}
       </div>
       {/* Line */}
@@ -93,7 +112,13 @@ const InvestmentManagementCard = ({
         <div className="flex items-center pt-4">
           {InvestmentManagementCard(investmentName)}
           <div className="pl-4">
-            <span className="text-gray-600 font-red-hat-display text-base font-normal text-white font-red-hat-display text-base font-normal block">
+            <span
+              className={`${getColorByMode(
+                isDarkMode,
+                "text-gray-100",
+                "text-gray-800"
+              )} font-red-hat-display  font-red-hat-display text-base font-normal block`}
+            >
               {investmentName}
             </span>
 

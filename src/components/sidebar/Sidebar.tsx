@@ -1,4 +1,3 @@
-import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SingleSidebarOption from "./sidebarComponents/SingleSidebarOption";
 import { LuLayoutDashboard } from "react-icons/lu";
@@ -8,6 +7,8 @@ import { toggleSidebar } from "../../actions/sidebarActions";
 import { RootState } from "../../reducers/index";
 import { Link } from "react-router-dom";
 import { ReactComponent as AppLogo } from "../../assets/icons/logo-app.svg";
+import SidebarToggle from "./sidebarComponents/SidebarToggle";
+import { getColorByMode } from "../../utils/utils";
 
 const Sidebar = () => {
   const collapsed = useSelector((state: RootState) => state.sidebar.collapsed);
@@ -17,10 +18,18 @@ const Sidebar = () => {
     dispatch(toggleSidebar());
   };
 
+  const isDarkMode = useSelector(
+    (state: RootState) => state.sidebar.isDarkMode
+  );
+
   return (
     <div className="sidebar flex h-100">
       <div
-        className="bg-gray-800 transition-width duration-300"
+        className={`${getColorByMode(
+          isDarkMode,
+          "bg-gray-800",
+          "bg-gray-600"
+        )} transition-width duration-300`}
         style={{ width: collapsed ? "4rem" : "16rem" }}
       >
         <div className="cursor-pointer flex items-center justify-between py-4">
@@ -49,6 +58,9 @@ const Sidebar = () => {
             </Link>
           </>
         )}
+        <div className="sidebar-toggle flex items-center justify-center mt-20">
+          <SidebarToggle />
+        </div>
       </div>
     </div>
   );
