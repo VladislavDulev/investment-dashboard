@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Sidebar from "./components/sidebar/Sidebar";
 import Dashboard from "./components/dashboard/Dashboard";
 
@@ -6,12 +7,18 @@ import Dashboard from "./components/dashboard/Dashboard";
 //TODO: SEE IF ERRORS TO FIX
 function App() {
   return (
-    <div className="App bg-gray-900">
-      <div className="flex">
-        <Sidebar />
-        <Dashboard />
+    <Router>
+      <div className="App bg-gray-900">
+        <div className="flex">
+          <Sidebar />
+          <Routes>
+            <Route path="/investments" element={<Dashboard />} />
+            {/* <Route path="/settings" element={<Settings />} /> */}
+            <Route path="/" element={<Dashboard />} />
+          </Routes>
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }
 

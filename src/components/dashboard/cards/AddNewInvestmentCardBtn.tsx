@@ -1,5 +1,6 @@
 import React from "react";
-import buttonAdd from "../../../assets/icons/button-add.jpg";
+
+import { ReactComponent as AddIcon } from "../../../assets/icons/button-add.svg";
 
 interface IAddNewInvestmentCardBtn {
   onAddClick: () => void;
@@ -12,7 +13,7 @@ const AddNewInvestmentCardBtn = ({ onAddClick }: IAddNewInvestmentCardBtn) => {
       onClick={onAddClick}
     >
       <button className="focus:outline-none">
-        <img src={buttonAdd} alt="Button Add" />
+        <AddIcon style={{ borderRadius: "50%" }} />
       </button>
     </div>
   );

@@ -1,0 +1,25 @@
+<svg width="103" height="102" viewBox="0 0 103 102" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="103" height="102" fill="#F5F5F5"/>
+<g id="Desktop - 3" clip-path="url(#clip0_0_1)">
+<rect width="1440" height="1980" transform="translate(-399 -995)" fill="#1E1F28"/>
+<g id="Frame 3">
+<g id="panel-invested">
+<rect x="-124" y="-145" width="352" height="450" rx="20" fill="#2B2B38"/>
+<g id="Frame 4">
+<g id="button-add">
+<circle id="Ellipse 11" cx="51.5" cy="51" r="51" fill="white" fill-opacity="0.3"/>
+<g id="Group 2">
+<path id="Line 5" d="M52 25L52 78" stroke="white" stroke-width="2" stroke-linecap="round"/>
+<path id="Line 6" d="M77.5 52.5L24.5 52.5" stroke="white" stroke-width="2" stroke-linecap="round"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_0_1">
+<rect width="1440" height="1980" fill="white" transform="translate(-399 -995)"/>
+</clipPath>
+</defs>
+</svg>
