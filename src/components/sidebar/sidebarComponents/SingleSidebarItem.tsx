@@ -1,14 +1,11 @@
 import React from "react";
 
-//TODO: See for better names.
-//TODO: Enum for the options
-
-interface ISingleSidebarOption {
+interface ISingleSidebarItem {
   icon: React.ReactNode;
   optionName: string;
 }
 
-const SingleSidebarOption = ({ icon, optionName }: ISingleSidebarOption) => {
+const SingleSidebarItem = ({ icon, optionName }: ISingleSidebarItem) => {
   return (
     <div className="flex items-center text-white cursor-pointer py-2 px-4 hover:bg-gray-700">
       <div className="mr-2">{icon}</div>
@@ -17,4 +14,4 @@ const SingleSidebarOption = ({ icon, optionName }: ISingleSidebarOption) => {
   );
 };
 
-export default SingleSidebarOption;
+export default SingleSidebarItem;

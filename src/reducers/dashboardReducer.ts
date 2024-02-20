@@ -20,7 +20,7 @@ type DashboardAction =
   | { type: ActionTypes.SET_ACTIVE_CARD_COUNT; payload: number }
   | { type: ActionTypes.SET_CANCELED_CARD_COUNT; payload: number }
   | { type: ActionTypes.SET_TOTAL_CARD_VALUE; payload: number }
-  | { type: ActionTypes.INIT_CARDS; payload: any }
+  | { type: ActionTypes.INIT_CARDS; payload: ICard[] }
   | { type: ActionTypes.ADD_CARD; payload: ICard }
   | {
       type: ActionTypes.TOGGLE_CARD_STATUS;

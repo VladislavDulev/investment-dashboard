@@ -11,11 +11,12 @@ import {
   MenuItem,
   TextField,
 } from "@mui/material";
-import { ICard } from "../../interfaces/card";
-import { InvestmentTypes } from "../../../types/investmentTypes";
-import { CardStatusTypes } from "../../../types/cardStatusTypes";
-import { InvestmentNamesTypes } from "../../../types/InvestmentNamesTypes";
-import { InvestmentListingsTypes } from "../../../types/investmentListingsTypes";
+import { ICard } from "../../../interfaces/card";
+import { InvestmentTypes } from "../../../../types/investmentTypes";
+import { CardStatusTypes } from "../../../../types/cardStatusTypes";
+import { InvestmentNamesTypes } from "../../../../types/InvestmentNamesTypes";
+import { InvestmentListingsTypes } from "../../../../types/investmentListingsTypes";
+import { handleInvestmentTypeChange } from "../../../../utils/investmentUtils";
 
 interface IModalForms {
   isOpen: boolean;
@@ -24,53 +25,13 @@ interface IModalForms {
 }
 
 const ModalForm = ({ isOpen, onClose, onSubmit }: IModalForms) => {
-  const handleInvestmentTypeChange = (
-    selectedInvestmentName: string,
-    setFieldValue: Function
-  ) => {
-    let newInvestmentType;
-    let newInvestmentListing;
-
-    switch (selectedInvestmentName) {
-      case InvestmentNamesTypes.APPLE:
-      case InvestmentNamesTypes.NETFLIX:
-      case InvestmentNamesTypes.DISNEY:
-      case InvestmentNamesTypes.TESLA:
-        newInvestmentType = InvestmentTypes.STOCKS;
-        break;
-      case InvestmentNamesTypes.BITCOIN:
-        newInvestmentType = InvestmentTypes.CRYPTO;
-        break;
-      case InvestmentNamesTypes.GOLD:
-        newInvestmentType = InvestmentTypes.COMMODITIES;
-        break;
+  const validate = (values: any) => {
+    const errors: any = {};
+    if (values.value < 1) {
+      errors.value = "Value must be greater than or equal to 1";
     }
-
-    switch (selectedInvestmentName) {
-      case InvestmentNamesTypes.NETFLIX:
-        newInvestmentListing = InvestmentListingsTypes.NTFLX;
-        break;
-      case InvestmentNamesTypes.APPLE:
-        newInvestmentListing = InvestmentListingsTypes.AAPL;
-        break;
-      case InvestmentNamesTypes.BITCOIN:
-        newInvestmentListing = InvestmentListingsTypes.BTC;
-        break;
-      case InvestmentNamesTypes.DISNEY:
-        newInvestmentListing = InvestmentListingsTypes.DIS;
-        break;
-      case InvestmentNamesTypes.GOLD:
-        newInvestmentListing = InvestmentListingsTypes.AU;
-        break;
-      case InvestmentNamesTypes.TESLA:
-        newInvestmentListing = InvestmentListingsTypes.TSLA;
-        break;
-    }
-
-    setFieldValue("investmentType", newInvestmentType);
-    setFieldValue("investmentListing", newInvestmentListing);
+    return errors;
   };
-
   return (
     <Dialog open={isOpen}>
       <DialogTitle className="bg-gray-300">Add New Investment</DialogTitle>
@@ -81,15 +42,18 @@ const ModalForm = ({ isOpen, onClose, onSubmit }: IModalForms) => {
           investmentType: InvestmentTypes.COMMODITIES,
           investmentName: InvestmentNamesTypes.APPLE,
           investmentListing: InvestmentListingsTypes.AAPL,
-          value: 0,
+          value: 1,
           date: new Date().toISOString().split("T")[0],
         }}
+        validate={validate}
         onSubmit={(values: any) => {
-          onSubmit(values);
-          onClose();
+          if (values.value >= 1) {
+            onSubmit(values);
+            onClose();
+          }
         }}
       >
-        {({ handleChange, values, setFieldValue }: any) => (
+        {({ handleChange, values, setFieldValue, isValid }: any) => (
           <Form className="bg-gray-300">
             <DialogContent>
               <FormControl
@@ -148,12 +112,17 @@ const ModalForm = ({ isOpen, onClose, onSubmit }: IModalForms) => {
                   type="number"
                   value={values.value}
                   onChange={handleChange}
+                  error={!!values.value && values.value < 1}
                 />
               </FormControl>
             </DialogContent>
             <DialogActions>
               <Button onClick={onClose}>Cancel</Button>
-              <Button type="submit" variant="contained">
+              <Button
+                type="submit"
+                variant="contained"
+                disabled={!isValid || values.value < 1}
+              >
                 Add
               </Button>
             </DialogActions>

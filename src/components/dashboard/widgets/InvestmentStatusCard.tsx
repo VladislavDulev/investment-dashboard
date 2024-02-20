@@ -4,9 +4,7 @@ import { ReactComponent as ClosedIcon } from "../../../assets/icons/icon-closed.
 import { CardStatusTypes } from "../../../types/cardStatusTypes";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
-import { getColorByMode } from "../../../utils/utils";
-
-// //TODO: Possible other ways to import the icon by using a component or something.
+import useColorByMode from "../../../hooks/useColorByMode";
 
 interface IInvestmentStatusCard {
   cardType: CardStatusTypes;
@@ -20,16 +18,9 @@ const InvestmentStatusCard = ({ cardType, title }: IInvestmentStatusCard) => {
   const closedCardCount = useSelector(
     (state: RootState) => state.dashboard.closedCardCount
   );
-
   const totalCardValue = useSelector(
     (state: RootState) => state.dashboard.totalCardValue
   );
-
-  const isDarkMode = useSelector(
-    (state: RootState) => state.sidebar.isDarkMode
-  );
-
-  // //TODO: Case for the investment card when add value to the store for it
 
   const renderContent = (cardType: CardStatusTypes, showIcon: boolean) => {
     let content = null;
@@ -65,8 +56,7 @@ const InvestmentStatusCard = ({ cardType, title }: IInvestmentStatusCard) => {
 
   return (
     <div
-      className={`investment-status-card ${getColorByMode(
-        isDarkMode,
+      className={`investment-status-card ${useColorByMode(
         "bg-gray-800",
         "bg-gray-100"
       )} rounded-lg p-8 w-88 h-48 flex-shrink-0 flex flex-col justify-end relative`}
@@ -80,8 +70,7 @@ const InvestmentStatusCard = ({ cardType, title }: IInvestmentStatusCard) => {
         {title}
       </div>
       <div
-        className={`${getColorByMode(
-          isDarkMode,
+        className={`${useColorByMode(
           "text-gray-100",
           "text-gray-600"
         )} font-red-hat-display text-5xl font-normal mt-2`}

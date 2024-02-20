@@ -1,18 +1,11 @@
 import Toggle from "react-toggle";
 import "react-toggle/style.css";
-import { CardStatusTypes } from "../../../types/cardStatusTypes";
-import { InvestmentNamesTypes } from "../../../types/InvestmentNamesTypes";
-import { InvestmentTypes } from "../../../types/investmentTypes";
-import { InvestmentListingsTypes } from "../../../types/investmentListingsTypes";
-import LogoTesla from "../../../assets/icons/logo-tesla.png";
-import LogoApple from "../../../assets/icons/logo-apple.png";
-import LogoBitcoin from "../../../assets/icons/logo-bitcoin.png";
-import LogoGold from "../../../assets/icons/logo-gold.png";
-import LogoNetflix from "../../../assets/icons/logo-netflix.png";
-import LogoDisney from "../../../assets/icons/logo-disney.png";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../reducers";
-import { getColorByMode } from "../../../utils/utils";
+import { CardStatusTypes } from "../../../../types/cardStatusTypes";
+import { InvestmentNamesTypes } from "../../../../types/InvestmentNamesTypes";
+import { InvestmentTypes } from "../../../../types/investmentTypes";
+import { InvestmentListingsTypes } from "../../../../types/investmentListingsTypes";
+import useColorByMode from "../../../../hooks/useColorByMode";
+import { getIconSource } from "../../../../utils/utils";
 
 interface IInvestmentManagementCard {
   status: CardStatusTypes;
@@ -33,29 +26,6 @@ const InvestmentManagementCard = ({
   date,
   onToggle,
 }: IInvestmentManagementCard) => {
-  const isDarkMode = useSelector(
-    (state: RootState) => state.sidebar.isDarkMode
-  );
-
-  const getIconSource = (investmentName: InvestmentNamesTypes) => {
-    switch (investmentName) {
-      case InvestmentNamesTypes.TESLA:
-        return LogoTesla;
-      case InvestmentNamesTypes.NETFLIX:
-        return LogoNetflix;
-      case InvestmentNamesTypes.APPLE:
-        return LogoApple;
-      case InvestmentNamesTypes.GOLD:
-        return LogoGold;
-      case InvestmentNamesTypes.BITCOIN:
-        return LogoBitcoin;
-      case InvestmentNamesTypes.DISNEY:
-        return LogoDisney;
-      default:
-        return null;
-    }
-  };
-
   const InvestmentManagementCard = (investmentName: InvestmentNamesTypes) => {
     const iconSrc = getIconSource(investmentName);
     return (
@@ -72,8 +42,7 @@ const InvestmentManagementCard = ({
       style={
         status === CardStatusTypes.CLOSED ? { opacity: 0.4 } : { opacity: 1 }
       }
-      className={`investment-management-card  ${getColorByMode(
-        isDarkMode,
+      className={`investment-management-card  ${useColorByMode(
         "bg-gray-800",
         "bg-gray-100"
       )} rounded-lg p-8 w-88 h-96 flex-shrink-0 flex flex-col justify-end relative  `}
@@ -97,8 +66,7 @@ const InvestmentManagementCard = ({
       </div>
       {/* Amount */}
       <div
-        className={`${getColorByMode(
-          isDarkMode,
+        className={`${useColorByMode(
           "text-gray-100",
           "text-gray-600"
         )} font-red-hat-display text-5xl font-normal mb-20`}
@@ -113,8 +81,7 @@ const InvestmentManagementCard = ({
           {InvestmentManagementCard(investmentName)}
           <div className="pl-4">
             <span
-              className={`${getColorByMode(
-                isDarkMode,
+              className={`${useColorByMode(
                 "text-gray-100",
                 "text-gray-800"
               )} font-red-hat-display  font-red-hat-display text-base font-normal block`}

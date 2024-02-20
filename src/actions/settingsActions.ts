@@ -6,7 +6,7 @@ export const loadProfile = (profile: IProfile) => ({
   payload: profile,
 });
 
-export const updateProfileField = (field: keyof IProfile, value: any) => ({
+export const updateProfileField = (field: keyof IProfile, value: string) => ({
   type: ActionTypes.UPDATE_PROFILE_FIELD,
   payload: { field, value },
 });

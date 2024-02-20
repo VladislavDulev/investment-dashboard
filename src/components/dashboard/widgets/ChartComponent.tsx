@@ -1,17 +1,12 @@
-import React from "react";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
-import { getColorByMode } from "../../../utils/utils";
+import useColorByMode from "../../../hooks/useColorByMode";
 
 const ChartComponent = () => {
   const cardsData = useSelector(
     (state: RootState) => state.dashboard.cardsData
-  );
-
-  const isDarkMode = useSelector(
-    (state: RootState) => state.sidebar.isDarkMode
   );
 
   const chartData = cardsData.map((card) => ({
@@ -21,15 +16,18 @@ const ChartComponent = () => {
 
   const options = {
     chart: {
-      backgroundColor: getColorByMode(isDarkMode, "#1F2937", "#F3F4F6"),
+      backgroundColor: useColorByMode("#1F2937", "#F3F4F6"),
       borderRadius: "20",
     },
     title: {
       text: "Area investments",
+      style: {
+        color: useColorByMode("#FFFFFF", "#000000"),
+      },
     },
     plotOptions: {
       pie: {
-        innerSize: "50%",
+        innerSize: "70%",
         depth: 45,
         dataLabels: {
           enabled: true,

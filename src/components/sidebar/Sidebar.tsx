@@ -1,5 +1,4 @@
 import { useSelector, useDispatch } from "react-redux";
-import SingleSidebarOption from "./sidebarComponents/SingleSidebarOption";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { CiSettings } from "react-icons/ci";
 import { FiMenu } from "react-icons/fi";
@@ -8,7 +7,8 @@ import { RootState } from "../../reducers/index";
 import { Link } from "react-router-dom";
 import { ReactComponent as AppLogo } from "../../assets/icons/logo-app.svg";
 import SidebarToggle from "./sidebarComponents/SidebarToggle";
-import { getColorByMode } from "../../utils/utils";
+import SingleSidebarItem from "./sidebarComponents/SingleSidebarItem";
+import useColorByMode from "../../hooks/useColorByMode";
 
 const Sidebar = () => {
   const collapsed = useSelector((state: RootState) => state.sidebar.collapsed);
@@ -18,15 +18,10 @@ const Sidebar = () => {
     dispatch(toggleSidebar());
   };
 
-  const isDarkMode = useSelector(
-    (state: RootState) => state.sidebar.isDarkMode
-  );
-
   return (
     <div className="sidebar flex sticky top-0 h-screen">
       <div
-        className={`${getColorByMode(
-          isDarkMode,
+        className={`${useColorByMode(
           "bg-gray-800",
           "bg-gray-600"
         )} transition-width duration-300`}
@@ -44,17 +39,14 @@ const Sidebar = () => {
         {!collapsed && (
           <>
             <Link to="/investments" className="text-white">
-              <SingleSidebarOption
+              <SingleSidebarItem
                 icon={<LuLayoutDashboard />}
                 optionName="Investments"
               />
             </Link>
 
             <Link to="/settings" className="text-white">
-              <SingleSidebarOption
-                icon={<CiSettings />}
-                optionName="Settings"
-              />
+              <SingleSidebarItem icon={<CiSettings />} optionName="Settings" />
             </Link>
           </>
         )}
