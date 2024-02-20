@@ -8,8 +8,6 @@ import { loadProfile } from "./actions/settingsActions";
 import { profileData } from "./data/profile";
 import useColorByMode from "./hooks/useColorByMode";
 
-// TODO: PUSH TO MASTER
-
 function App() {
   const dispatch = useDispatch();
 
