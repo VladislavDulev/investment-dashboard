@@ -1,4 +1,4 @@
-import { ICard } from "../components/interfaces/card";
+import { ICard } from "../interfaces/card";
 import { CardStatusTypes } from "../types/cardStatusTypes";
 import { InvestmentListingsTypes } from "../types/investmentListingsTypes";
 import { InvestmentNamesTypes } from "../types/InvestmentNamesTypes";

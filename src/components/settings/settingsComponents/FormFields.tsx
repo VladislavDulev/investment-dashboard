@@ -3,8 +3,9 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
 import { useDispatch } from "react-redux";
 import { updateProfileField } from "../../../actions/settingsActions";
-import { IProfile } from "../../interfaces/profile";
+
 import useColorByMode from "../../../hooks/useColorByMode";
+import { IProfile } from "../../../interfaces/profile";
 
 interface IFormFields {
   isInputEnabled: boolean;

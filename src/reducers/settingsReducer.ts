@@ -1,4 +1,4 @@
-import { IProfile } from "../components/interfaces/profile";
+import { IProfile } from "../interfaces/profile";
 import { ActionTypes } from "../types/actionTypes";
 
 interface SettingsState {

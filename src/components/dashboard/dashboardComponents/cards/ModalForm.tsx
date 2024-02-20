@@ -11,7 +11,7 @@ import {
   MenuItem,
   TextField,
 } from "@mui/material";
-import { ICard } from "../../../interfaces/card";
+import { ICard } from "../../../../interfaces/card";
 import { InvestmentTypes } from "../../../../types/investmentTypes";
 import { CardStatusTypes } from "../../../../types/cardStatusTypes";
 import { InvestmentNamesTypes } from "../../../../types/InvestmentNamesTypes";

@@ -12,7 +12,7 @@ import {
   setTotalCardValue,
   toggleCardStatus,
 } from "../../../../actions/dashboardActions";
-import { ICard } from "../../../interfaces/card";
+import { ICard } from "../../../../interfaces/card";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../reducers";
 import ModalForm from "./ModalForm";

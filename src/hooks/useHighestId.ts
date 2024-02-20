@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { ICard } from "../components/interfaces/card";
+import { ICard } from "../interfaces/card";
 
 const useHighestId = (cardsData: ICard[]) => {
   const highestIdRef = useRef<number>(0);
