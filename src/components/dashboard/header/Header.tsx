@@ -1,21 +1,30 @@
-import { useSelector } from "react-redux";
-import { RootState } from "../../../reducers";
 import ProfilePicture from "../../../assets/icons/profile-picture.png";
 import useColorByMode from "../../../hooks/useColorByMode";
 import { Link } from "react-router-dom";
+import { useProfileData } from "../../../hooks/useProfileData";
 
 const Header = () => {
-  const profile = useSelector((state: RootState) => state.settings.data);
+  const profileData = useProfileData();
 
-  const greeting = `👋 Welcome ${profile?.fistName}!`;
+  const colorStyle = useColorByMode("text-gray-100", "text-gray-800");
+
+  if (!profileData) {
+    return (
+      <h1
+        className={`header font-red-hat-display text-4xl font-normal p-8 flex justify-between items-center`}
+      >
+        Loading...
+      </h1>
+    );
+  }
+
+  const greeting = `👋 Welcome ${profileData?.fistName}!`;
 
   return (
     <h1
       className={`header font-red-hat-display text-4xl font-normal p-8 flex justify-between items-center`}
     >
-      <div className={`${useColorByMode("text-gray-100", "text-gray-800")}`}>
-        {greeting}
-      </div>
+      <div className={colorStyle}>{greeting}</div>
       <Link to="/settings">
         <img src={ProfilePicture} alt="Avatar" className="w-12" />
       </Link>

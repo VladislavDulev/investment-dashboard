@@ -1,11 +1,11 @@
 import React, { ChangeEvent } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../reducers";
+
 import { useDispatch } from "react-redux";
 import { updateProfileField } from "../../../actions/settingsActions";
 
 import useColorByMode from "../../../hooks/useColorByMode";
 import { IProfile } from "../../../interfaces/profile";
+import { useProfileData } from "../../../hooks/useProfileData";
 
 interface IFormFields {
   isInputEnabled: boolean;
@@ -13,11 +13,16 @@ interface IFormFields {
 
 const FormFields = ({ isInputEnabled }: IFormFields) => {
   const dispatch = useDispatch();
-  const profile = useSelector((state: RootState) => state.settings.data);
+
+  const profileData = useProfileData();
 
   const handleFieldChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     dispatch(updateProfileField(name as keyof IProfile, value));
+
+    const updatedProfile = { ...profileData, [name]: value };
+
+    localStorage.setItem("profile", JSON.stringify(updatedProfile));
   };
 
   const enabledStyle = isInputEnabled ? "text-gray-800" : "";
@@ -39,7 +44,7 @@ const FormFields = ({ isInputEnabled }: IFormFields) => {
           id="firstName"
           type="text"
           name="fistName"
-          value={profile?.fistName || ""}
+          value={profileData?.fistName || ""}
           onChange={handleFieldChange}
           className={`${combinedStyles} rounded-lg px-4 py-2`}
           disabled={!isInputEnabled}
@@ -56,7 +61,7 @@ const FormFields = ({ isInputEnabled }: IFormFields) => {
           id="lastName"
           type="text"
           name="lastName"
-          value={profile?.lastName || ""}
+          value={profileData?.lastName || ""}
           onChange={handleFieldChange}
           className={`${combinedStyles} rounded-lg px-4 py-2`}
           disabled={!isInputEnabled}
@@ -73,7 +78,7 @@ const FormFields = ({ isInputEnabled }: IFormFields) => {
           id="age"
           type="number"
           name="age"
-          value={profile?.age || ""}
+          value={profileData?.age || ""}
           onChange={handleFieldChange}
           className={`${combinedStyles} rounded-lg px-4 py-2`}
           disabled={!isInputEnabled}
