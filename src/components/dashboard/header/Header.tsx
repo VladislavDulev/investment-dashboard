@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
 import ProfilePicture from "../../../assets/icons/profile-picture.png";
 import useColorByMode from "../../../hooks/useColorByMode";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const profile = useSelector((state: RootState) => state.settings.data);
@@ -15,9 +16,9 @@ const Header = () => {
       <div className={`${useColorByMode("text-gray-100", "text-gray-800")}`}>
         {greeting}
       </div>
-      <div>
+      <Link to="/settings">
         <img src={ProfilePicture} alt="Avatar" className="w-12" />
-      </div>
+      </Link>
     </h1>
   );
 };
