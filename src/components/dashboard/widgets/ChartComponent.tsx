@@ -3,16 +3,36 @@ import HighchartsReact from "highcharts-react-official";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../reducers";
 import useColorByMode from "../../../hooks/useColorByMode";
+import { ChartData } from "../../../interfaces/chartData";
 
 const ChartComponent = () => {
   const cardsData = useSelector(
     (state: RootState) => state.dashboard.cardsData
   );
 
-  const chartData = cardsData.map((card) => ({
+  const formattedChartData = cardsData.map((card) => ({
     name: card.investmentName,
     y: card.value,
   }));
+
+  const aggregateChartData = (data: ChartData[]) => {
+    const aggregatedData: { [name: string]: number } = {};
+
+    data.forEach(({ name, y }: any) => {
+      if (aggregatedData[name]) {
+        aggregatedData[name] += y;
+      } else {
+        aggregatedData[name] = y;
+      }
+    });
+
+    return Object.keys(aggregatedData).map((name) => ({
+      name,
+      y: aggregatedData[name],
+    }));
+  };
+
+  const chartData = aggregateChartData(formattedChartData);
 
   const options = {
     chart: {
